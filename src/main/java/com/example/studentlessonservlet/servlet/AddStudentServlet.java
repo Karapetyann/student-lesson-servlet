@@ -26,8 +26,6 @@ public class AddStudentServlet extends HttpServlet {
     StudentManager studentManager = new StudentManager();
     LessonManager lessonManager = new LessonManager();
     private final String UPLOAD_DIRECTORY = "C:\\Users\\Hakob\\IdeaProjects\\student-lesson-servlet\\uploadDirectory";
-
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Lesson> lessons = lessonManager.getLessons();

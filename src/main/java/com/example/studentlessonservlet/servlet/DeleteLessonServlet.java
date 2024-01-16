@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/deleteLesson")
+
 public class DeleteLessonServlet extends HttpServlet {
     LessonManager lessonManager = new LessonManager();
     @Override

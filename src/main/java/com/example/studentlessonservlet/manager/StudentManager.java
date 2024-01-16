@@ -33,7 +33,6 @@ public class StudentManager {
         }
         return students;
     }
-
     public void add(Student student) {
         String sql = "INSERT INTO student(name, surname, email, age, lesson_id, pic_name) VALUES(?,?,?,?,?,?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {

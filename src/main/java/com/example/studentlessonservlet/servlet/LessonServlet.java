@@ -13,9 +13,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/lessons")
 public class LessonServlet extends HttpServlet {
-
     LessonManager lessonManager = new LessonManager();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Lesson> lessons = lessonManager.getLessons();

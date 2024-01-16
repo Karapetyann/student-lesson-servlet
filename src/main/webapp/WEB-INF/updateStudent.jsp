@@ -1,12 +1,6 @@
 <%@ page import="com.example.studentlessonservlet.model.Student" %>
 <%@ page import="com.example.studentlessonservlet.model.Lesson" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: Hakob
-  Date: 13.01.2024
-  Time: 22:08
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

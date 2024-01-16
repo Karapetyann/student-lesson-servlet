@@ -13,8 +13,6 @@ import java.io.OutputStream;
 @WebServlet(urlPatterns = "/downloadImage")
 public class DownloadImageServlet extends HttpServlet {
     private final String UPLOAD_DIRECTORY = "C:\\Users\\Hakob\\IdeaProjects\\student-lesson-servlet\\uploadDirectory";
-
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String imageName = req.getParameter("imageName");

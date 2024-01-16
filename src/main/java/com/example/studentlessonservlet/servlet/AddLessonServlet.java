@@ -16,19 +16,16 @@ import java.sql.Date;
 
 @WebServlet(urlPatterns = "/addLesson")
 @MultipartConfig(
-        maxFileSize = 1024 * 1024 * 5,
+        maxFileSize = 1024 * 1024 * 5,//5mb
         maxRequestSize = 1024 * 1024 * 10,
         fileSizeThreshold = 1024 * 1024 * 1
 )
 public class AddLessonServlet extends HttpServlet {
     LessonManager lessonManager = new LessonManager();
     private final String UPLOAD_DIRECTORY = "C:\\Users\\Hakob\\IdeaProjects\\student-lesson-servlet\\uploadDirectory";
-
-
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/addLesson.jsp").forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("lessonName");

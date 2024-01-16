@@ -9,7 +9,6 @@ public class DBConnectionProvider {
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "root";
 
-
     private DBConnectionProvider(){
         try {
             Class.forName("com.mysql.jdbc.Driver");

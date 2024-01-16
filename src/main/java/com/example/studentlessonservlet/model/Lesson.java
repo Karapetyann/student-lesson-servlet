@@ -11,6 +11,7 @@ import java.sql.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Lesson {
     private int id;
     private String name;

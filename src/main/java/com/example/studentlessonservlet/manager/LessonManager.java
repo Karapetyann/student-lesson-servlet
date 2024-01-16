@@ -79,7 +79,6 @@ public class LessonManager {
         }
         return null;
     }
-
     public void update(Lesson lesson) {
         String sql = "UPDATE lesson SET name =?, duration = ?, lecturerName = ?, price = ?, pic_name = ? WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {

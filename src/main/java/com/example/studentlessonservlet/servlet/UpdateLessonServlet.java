@@ -20,7 +20,7 @@ public class UpdateLessonServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Lesson lesson = lessonManager.getById(id);
         req.setAttribute("lesson", lesson);
-        req.getRequestDispatcher("/WEB-INF/updateLesson.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/updateLesson.jsp").forward(req,resp);
     }
 
     @Override

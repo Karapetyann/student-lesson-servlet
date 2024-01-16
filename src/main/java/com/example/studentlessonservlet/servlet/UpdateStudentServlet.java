@@ -25,7 +25,7 @@ public class UpdateStudentServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Student student = studentManager.getById(id);
         req.setAttribute("student", student);
-        req.getRequestDispatcher("/WEB-INF/updateStudent.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/updateStudent.jsp").forward(req,resp);
     }
 
     @Override
