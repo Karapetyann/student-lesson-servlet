@@ -2,6 +2,7 @@ package com.example.studentlessonservlet.manager;
 
 import com.example.studentlessonservlet.db.DBConnectionProvider;
 import com.example.studentlessonservlet.model.Lesson;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class LessonManager {
                         .duration(resultSet.getInt("duration"))
                         .lecturerName(resultSet.getString("lecturerName"))
                         .price(resultSet.getDouble("price"))
+                        .picName(resultSet.getString("pic_name"))
                         .build());
             }
         } catch (SQLException e) {
@@ -31,12 +33,13 @@ public class LessonManager {
     }
 
     public void add(Lesson lesson) {
-        String sql = "INSERT INTO lesson(name, duration, lecturerName, price) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO lesson(name, duration, lecturerName, price, pic_name) VALUES(?,?,?,?,?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, lesson.getName());
             ps.setInt(2, lesson.getDuration());
             ps.setString(3, lesson.getLecturerName());
             ps.setDouble(4, lesson.getPrice());
+            ps.setString(5, lesson.getPicName());
             ps.executeUpdate();
             ResultSet generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -49,7 +52,7 @@ public class LessonManager {
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM lesson WHERE id="+id;
+        String sql = "DELETE FROM lesson WHERE id=" + id;
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
@@ -68,11 +71,27 @@ public class LessonManager {
                         .duration(resultSet.getInt("duration"))
                         .lecturerName(resultSet.getString("lecturerName"))
                         .price(resultSet.getDouble("price"))
+                        .picName(resultSet.getString("pic_name"))
                         .build();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    public void update(Lesson lesson) {
+        String sql = "UPDATE lesson SET name =?, duration = ?, lecturerName = ?, price = ?, pic_name = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, lesson.getName());
+            ps.setInt(2, lesson.getDuration());
+            ps.setString(3, lesson.getLecturerName());
+            ps.setDouble(4, lesson.getPrice());
+            ps.setString(5,lesson.getPicName());
+            ps.setInt(6, lesson.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

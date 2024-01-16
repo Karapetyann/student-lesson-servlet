@@ -13,10 +13,14 @@ import java.io.IOException;
 public class DeleteLessonServlet extends HttpServlet {
     LessonManager lessonManager = new LessonManager();
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id =Integer.parseInt(req.getParameter("id"));
-        lessonManager.delete(id);
-        resp.sendRedirect("/lessons");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp){
+        try {
+            int id = Integer.parseInt(req.getParameter("id"));
+            lessonManager.delete(id);
+            resp.sendRedirect("/lessons");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

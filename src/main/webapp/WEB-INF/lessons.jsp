@@ -21,6 +21,9 @@
             ID
         </th>
         <th>
+            Picture
+        </th>
+        <th>
             Name
         </th>
         <th>
@@ -35,12 +38,21 @@
         <th>
             Delete
         </th>
+        <th>
+            Update
+        </th>
     </tr>
     <%
         if (lessons != null && !lessons.isEmpty()) {
             for (Lesson lesson : lessons) { %>
     <tr>
         <td><%=lesson.getId()%>
+        </td>
+        <td><% if (lesson.getPicName() != null) { %>
+            <img src="/downloadImage?imageName=<%=lesson.getPicName()%>" width="50">
+            <% } else { %>
+            <span>No Picture</span>
+            <%}%>
         </td>
         <td><%=lesson.getName()%>
         </td>
@@ -51,6 +63,8 @@
         <td><%=lesson.getPrice()%>
         </td>
         <td><a href="/deleteLesson?id=<%=lesson.getId()%>">delete</a>
+        </td>
+        <td><a href="/updateLesson?id=<%=lesson.getId()%>">update</a>
         </td>
     </tr>
     <%

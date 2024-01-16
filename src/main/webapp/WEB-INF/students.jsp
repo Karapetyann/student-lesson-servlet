@@ -1,5 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.studentlessonservlet.model.Lesson" %>
 <%@ page import="com.example.studentlessonservlet.model.Student" %><%--
   Created by IntelliJ IDEA.
   User: Hakob
@@ -22,6 +21,9 @@
             ID
         </th>
         <th>
+            Picture
+        </th>
+        <th>
             Name
         </th>
         <th>
@@ -34,10 +36,13 @@
             Age
         </th>
         <th>
-        Lesson
+            Lesson
         </th>
         <th>
             Delete
+        </th>
+        <th>
+            Update
         </th>
     </tr>
     <%
@@ -45,6 +50,12 @@
             for (Student student : students) { %>
     <tr>
         <td><%=student.getId()%>
+        </td>
+        <td><% if (student.getPicName() != null) { %>
+            <img src="/downloadImage?imageName=<%=student.getPicName()%>" width="50">
+            <% } else { %>
+            <span>No Picture</span>
+            <%}%>
         </td>
         <td><%=student.getName()%>
         </td>
@@ -57,6 +68,8 @@
         <td><%=student.getLesson()%>
         </td>
         <td><a href="/deleteStudent?id=<%=student.getId()%>">delete</a>
+        </td>
+        <td><a href="/updateStudent?id=<%=student.getId()%>">update</a>
         </td>
     </tr>
     <%

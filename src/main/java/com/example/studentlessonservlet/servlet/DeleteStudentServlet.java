@@ -15,9 +15,13 @@ public class DeleteStudentServlet extends HttpServlet {
     StudentManager studentManager = new StudentManager();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        studentManager.delete(id);
-        resp.sendRedirect("/students");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            int id = Integer.parseInt(req.getParameter("id"));
+            studentManager.delete(id);
+            resp.sendRedirect("/students");
+        } catch (IOException | NumberFormatException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

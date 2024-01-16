@@ -8,7 +8,9 @@
 <h1><%= "Lessons and Students!" %>
 </h1>
 <br/>
-<a href="/lessons">View All Lessons</a>
-<a href="/students">View All Students</a>
+
+<a href="/lessons"><h2>View All Lessons</h2></a><br><br>
+<a href="/students"><h2>View All Students</h2></a>
+
 </body>
 </html>
