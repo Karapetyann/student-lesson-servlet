@@ -14,6 +14,7 @@ Add Lesson<br>
     Students surname: <input type="text" name="studentSurname"><br>
     Students email: <input type="text" name="studentEmail"><br>
     Students age: <input type="number" name="studentAge"><br>
+    Students User: <input type="hidden" name="user_id"><br>
     <select name="lesson_id">
         <%
             for (Lesson lesson : lessons) {%>

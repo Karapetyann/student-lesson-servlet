@@ -1,7 +1,9 @@
 package com.example.studentlessonservlet.servlet;
 
 import com.example.studentlessonservlet.manager.LessonManager;
+import com.example.studentlessonservlet.manager.UserManager;
 import com.example.studentlessonservlet.model.Lesson;
+import com.example.studentlessonservlet.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -21,11 +23,14 @@ import java.sql.Date;
         fileSizeThreshold = 1024 * 1024 * 1
 )
 public class AddLessonServlet extends HttpServlet {
-    LessonManager lessonManager = new LessonManager();
+    private LessonManager lessonManager = new LessonManager();
+    private UserManager userManager = new UserManager();
     private final String UPLOAD_DIRECTORY = "C:\\Users\\Hakob\\IdeaProjects\\student-lesson-servlet\\uploadDirectory";
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/addLesson.jsp").forward(req, resp);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("lessonName");
@@ -39,13 +44,21 @@ public class AddLessonServlet extends HttpServlet {
             pictureName = System.currentTimeMillis() + "_" + picture.getSubmittedFileName();
             picture.write(UPLOAD_DIRECTORY + File.separator + pictureName);
         }
-        lessonManager.add(Lesson.builder()
-                .name(name)
-                .duration(duration)
-                .lecturerName(lecturerName)
-                .price(price)
-                        .picName(pictureName)
-                .build());
-        resp.sendRedirect("/lessons");
+        User user = (User) req.getSession().getAttribute("user");
+        Lesson byName = lessonManager.getByName(name);
+        if (byName == null) {
+            lessonManager.add(Lesson.builder()
+                    .name(name)
+                    .duration(duration)
+                    .lecturerName(lecturerName)
+                    .price(price)
+                    .picName(pictureName)
+                    .user(user)
+                    .build());
+            resp.sendRedirect("/lessons");
+        } else {
+            req.getSession().setAttribute("msg", "This name is already in use");
+            resp.sendRedirect("/");
+        }
     }
 }

@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Student {
     private int id;
     private String name;
     private String surname;
     private String email;
     private int age;
-    private Lesson lesson;
     private String picName;
+    private Lesson lesson;
+    private User user;
 }

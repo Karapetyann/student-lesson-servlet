@@ -12,9 +12,10 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/deleteLesson")
 
 public class DeleteLessonServlet extends HttpServlet {
-    LessonManager lessonManager = new LessonManager();
+    private LessonManager lessonManager = new LessonManager();
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp){
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
             int id = Integer.parseInt(req.getParameter("id"));
             lessonManager.delete(id);

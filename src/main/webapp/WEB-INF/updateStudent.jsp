@@ -16,7 +16,7 @@ Update Student<br><br>
     Student surname: <input type="text" value="<%=student.getSurname()%>" name="studentSurname"><br>
     Student email: <input type="text" name="studentEmail" value="<%=student.getEmail()%>"><br>
     Student age: <input type="number" name="studentAge" value="<%=student.getAge()%>"><br>
-    Student age: <input type="file" name="studentPicName" value="<%=student.getPicName()%>"><br>
+    Student picture: <input type="file" name="studentPicName" value="<%=student.getPicName()%>"><br>
     <select name="lessonId">
         <%
             for (Lesson lesson : lessons) {%>

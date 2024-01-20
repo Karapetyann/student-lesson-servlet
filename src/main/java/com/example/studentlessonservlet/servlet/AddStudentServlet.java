@@ -2,8 +2,10 @@ package com.example.studentlessonservlet.servlet;
 
 import com.example.studentlessonservlet.manager.LessonManager;
 import com.example.studentlessonservlet.manager.StudentManager;
+import com.example.studentlessonservlet.manager.UserManager;
 import com.example.studentlessonservlet.model.Lesson;
 import com.example.studentlessonservlet.model.Student;
+import com.example.studentlessonservlet.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -23,9 +25,11 @@ import java.util.List;
         fileSizeThreshold = 1024 * 1024 * 1
 )
 public class AddStudentServlet extends HttpServlet {
-    StudentManager studentManager = new StudentManager();
-    LessonManager lessonManager = new LessonManager();
+    private StudentManager studentManager = new StudentManager();
+    private LessonManager lessonManager = new LessonManager();
+    private UserManager userManager = new UserManager();
     private final String UPLOAD_DIRECTORY = "C:\\Users\\Hakob\\IdeaProjects\\student-lesson-servlet\\uploadDirectory";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Lesson> lessons = lessonManager.getLessons();
@@ -48,15 +52,23 @@ public class AddStudentServlet extends HttpServlet {
                 pictureName = System.currentTimeMillis() + "_" + picture.getSubmittedFileName();
                 picture.write(UPLOAD_DIRECTORY + File.separator + pictureName);
             }
-            studentManager.add(Student.builder()
-                    .name(name)
-                    .surname(surname)
-                    .email(email)
-                    .age(age)
-                    .lesson(byId)
-                    .picName(pictureName)
-                    .build());
-            resp.sendRedirect("/students");
+            User user = (User) req.getSession().getAttribute("user");
+            Student byEmail = studentManager.getByEmail(email);
+            if (byEmail == null) {
+                studentManager.add(Student.builder()
+                        .name(name)
+                        .surname(surname)
+                        .email(email)
+                        .age(age)
+                        .lesson(byId)
+                        .picName(pictureName)
+                        .user(user)
+                        .build());
+                resp.sendRedirect("/students");
+            } else {
+                req.getSession().setAttribute("msg", "This email is already in use");
+                resp.sendRedirect("/");
+            }
         } catch (IOException | NumberFormatException e) {
             throw new RuntimeException(e);
         } catch (ServletException e) {

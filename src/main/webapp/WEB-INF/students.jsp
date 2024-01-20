@@ -33,6 +33,9 @@
             Lesson
         </th>
         <th>
+            User
+        </th>
+        <th>
             Delete
         </th>
         <th>
@@ -59,7 +62,9 @@
         </td>
         <td><%=student.getAge()%>
         </td>
-        <td><%=student.getLesson()%>
+        <td><%=student.getLesson().getName() + " " + student.getLesson().getLecturerName() + " " + student.getLesson().getDuration()%>
+        </td>
+        <td><%=student.getUser().getName() + student.getUser().getSurname()%>
         </td>
         <td><a href="/deleteStudent?id=<%=student.getId()%>">delete</a>
         </td>

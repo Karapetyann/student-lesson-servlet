@@ -10,7 +10,8 @@ Update Lesson<br><br>
 <form method="post" action="/updateLesson">
     <input type="hidden" name="lessonId" value="<%=lesson.getId()%>">
     Lesson name: <input type="text" name="lessonName" value="<%=lesson.getName()%>"><br>
-    Lesson duration: <input type="number"  step="1"  min="1" max="120" value="<%=lesson.getDuration()%>" name="lessonDuration"><br>
+    Lesson duration: <input type="number" step="1" min="1" max="120" value="<%=lesson.getDuration()%>"
+                            name="lessonDuration"><br>
     Lesson lecturer name: <input type="text" name="lessonLecturerName" value="<%=lesson.getLecturerName()%>"><br>
     Lesson price: <input type="number" name="lessonPrice" value="<%=lesson.getPrice()%>"><br>
     Lesson picture: <input type="file" name="lessonPicName" value="<%=lesson.getPicName()%>"><br>

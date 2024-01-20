@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/home")
-
-public class HomeServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/")
+public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
+        if (req.getSession().getAttribute("user") != null) {
+            resp.sendRedirect("/home");
+        } else {
+            req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
+        }
     }
 }

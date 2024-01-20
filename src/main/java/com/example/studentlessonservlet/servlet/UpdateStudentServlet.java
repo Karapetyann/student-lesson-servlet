@@ -2,8 +2,10 @@ package com.example.studentlessonservlet.servlet;
 
 import com.example.studentlessonservlet.manager.LessonManager;
 import com.example.studentlessonservlet.manager.StudentManager;
+import com.example.studentlessonservlet.manager.UserManager;
 import com.example.studentlessonservlet.model.Lesson;
 import com.example.studentlessonservlet.model.Student;
+import com.example.studentlessonservlet.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,8 +17,9 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/updateStudent")
 public class UpdateStudentServlet extends HttpServlet {
-    StudentManager studentManager = new StudentManager();
-    LessonManager lessonManager = new LessonManager();
+    private StudentManager studentManager = new StudentManager();
+    private LessonManager lessonManager = new LessonManager();
+    private UserManager userManager = new UserManager();
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,7 +28,7 @@ public class UpdateStudentServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Student student = studentManager.getById(id);
         req.setAttribute("student", student);
-        req.getRequestDispatcher("/WEB-INF/updateStudent.jsp").forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/updateStudent.jsp").forward(req, resp);
     }
 
     @Override
@@ -39,6 +42,7 @@ public class UpdateStudentServlet extends HttpServlet {
             String picName = req.getParameter("studentPicName");
             int lessonId = Integer.parseInt(req.getParameter("lessonId"));
             Lesson lesson = lessonManager.getById(lessonId);
+            User user = (User) req.getSession().getAttribute("user");
             studentManager.update(Student.builder()
                     .id(id)
                     .name(name)
@@ -47,6 +51,7 @@ public class UpdateStudentServlet extends HttpServlet {
                     .age(age)
                     .picName(picName)
                     .lesson(lesson)
+                    .user(user)
                     .build());
             resp.sendRedirect("/students");
         } catch (IOException | NumberFormatException e) {

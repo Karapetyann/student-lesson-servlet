@@ -5,19 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Lesson {
+public class User {
     private int id;
     private String name;
-    private int duration;
-    private String lecturerName;
-    private double price;
-    private String picName;
-    private User user;
+    private String surname;
+    private String email;
+    private String password;
 }

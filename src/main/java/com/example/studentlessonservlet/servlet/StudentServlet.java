@@ -3,6 +3,7 @@ package com.example.studentlessonservlet.servlet;
 import com.example.studentlessonservlet.manager.StudentManager;
 import com.example.studentlessonservlet.model.Lesson;
 import com.example.studentlessonservlet.model.Student;
+import com.example.studentlessonservlet.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,11 +19,9 @@ public class StudentServlet extends HttpServlet {
     private StudentManager studentManager = new StudentManager();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Student> students = studentManager.getStudents();
-        req.setAttribute("students",students);
-        req.getRequestDispatcher("/WEB-INF/students.jsp").forward(req,resp);
+        User user = (User) req.getSession().getAttribute("user");
+        List<Student> students = studentManager.getByUser(user.getId());
+        req.setAttribute("students", students);
+        req.getRequestDispatcher("/WEB-INF/students.jsp").forward(req, resp);
     }
-
-
-
 }

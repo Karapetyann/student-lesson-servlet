@@ -30,6 +30,9 @@
             Price
         </th>
         <th>
+            User
+        </th>
+        <th>
             Delete
         </th>
         <th>
@@ -55,6 +58,8 @@
         <td><%=lesson.getLecturerName()%>
         </td>
         <td><%=lesson.getPrice()%>
+        </td>
+        <td><%=lesson.getUser().getName() + lesson.getUser().getSurname() %>
         </td>
         <td><a href="/deleteLesson?id=<%=lesson.getId()%>">delete</a>
         </td>

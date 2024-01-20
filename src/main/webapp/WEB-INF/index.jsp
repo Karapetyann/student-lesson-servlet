@@ -8,9 +8,17 @@
 <h1><%= "Lessons and Students!" %>
 </h1>
 <br/>
-
-<a href="/lessons"><h2>View All Lessons</h2></a><br><br><br>
-<a href="/students"><h2>View All Students</h2></a>
-
+<%if (request.getSession().getAttribute("msg") != null) {%>
+<span style="color: red"><%=session.getAttribute("msg")%></span>
+<%session.removeAttribute("msg"); %>
+<%}%>
+<form action="/login" method="post">
+    email: <input type="text" name="email"/> <br>
+    password: <input type="password" name="password"> <br>
+    <input type="submit" value="login">
+</form>
+<br>
+<br>
+<a href="/register">Register</a>
 </body>
 </html>
